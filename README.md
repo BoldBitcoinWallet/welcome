@@ -1,4 +1,4 @@
-# Bold Bitcoin Wallet - Next.js Website
+# Bold Bitcoin Wallet
 
 Welcome to Bold BTC - Your Superior Non-Custodial Bitcoin Wallet
 
