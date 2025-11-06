@@ -34,7 +34,7 @@ export default function Header() {
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
+          <Link href="/" className="flex items-center space-x-3 group cursor-pointer">
             <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-110 bg-white rounded shadow-sm">
               <Image
                 src="/ic_launcher.png"
@@ -52,7 +52,7 @@ export default function Header() {
           {/* Desktop Navigation */}
           <ul className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <li key={item.href}>
+              <li key={item.href} className="cursor-pointer">
                 <Link
                   href={item.href}
                   className="text-gray-300 hover:text-accent font-medium transition-colors duration-300 relative group"
@@ -62,12 +62,12 @@ export default function Header() {
                 </Link>
               </li>
             ))}
-            <li>
+            <li className="cursor-pointer">
               <a
                 href="https://docs.boldbitcoinwallet.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-700 transition-colors duration-300"
+                className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-700 transition-colors duration-300 cursor-pointer"
               >
                 <Image src="/documentation.png" alt="Docs" width={24} height={24} />
               </a>
@@ -78,7 +78,7 @@ export default function Header() {
           <div className="md:hidden flex items-center space-x-2">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 rounded-lg hover:bg-gray-700 transition-colors duration-300"
+              className="p-2 rounded-lg hover:bg-gray-700 transition-colors duration-300 cursor-pointer"
               aria-label="Toggle menu"
             >
               <svg
@@ -115,7 +115,7 @@ export default function Header() {
         >
           <ul className="py-4 space-y-2">
             {navItems.map((item) => (
-              <li key={item.href}>
+              <li key={item.href} className="cursor-pointer">
                 <Link
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
@@ -125,12 +125,12 @@ export default function Header() {
                 </Link>
               </li>
             ))}
-            <li>
+            <li className="cursor-pointer">
               <a
                 href="https://docs.boldbitcoinwallet.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-accent rounded-lg transition-colors duration-300"
+                className="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-accent rounded-lg transition-colors duration-300 cursor-pointer"
               >
                 <Image
                   src="/documentation.png"

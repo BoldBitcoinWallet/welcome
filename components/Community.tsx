@@ -86,7 +86,7 @@ export default function Community() {
                 type: "spring",
                 stiffness: 200,
               }}
-              className="group relative"
+              className="group relative cursor-pointer"
             >
               {/* Hover Glow Effect */}
               <div

@@ -113,9 +113,9 @@ export default function ScreenshotGallery() {
           </div>
 
           {/* Navigation Arrows */}
-                    <button
+          <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10 cursor-pointer"
             aria-label="Previous"
           >
             <svg
@@ -134,7 +134,7 @@ export default function ScreenshotGallery() {
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10 cursor-pointer"
             aria-label="Next"
           >
             <svg
@@ -156,7 +156,7 @@ export default function ScreenshotGallery() {
               <button
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
                   index === currentIndex
                     ? "bg-[#34495e] w-8"
                     : "bg-gray-300 hover:bg-gray-400"

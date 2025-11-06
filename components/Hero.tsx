@@ -59,7 +59,7 @@ export default function Hero() {
                 href={button.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center space-x-3 bg-white/10 backdrop-blur-md hover:bg-white/20 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-white/20"
+                className="group flex items-center space-x-3 bg-white/10 backdrop-blur-md hover:bg-white/20 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-white/20 cursor-pointer"
               >
                 {button.useEmoji ? (
                   <span className="text-xl">{button.emoji}</span>
