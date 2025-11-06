@@ -6,16 +6,26 @@ export default function Hero() {
       href: "https://play.google.com/store/apps/details?id=com.boldwallet",
       icon: "/playstore.svg",
       label: "Android",
+      useEmoji: false,
     },
     {
       href: "https://apps.apple.com/us/app/bold-bitcoin-wallet/id6748949478",
       icon: "/appstore.svg",
       label: "iOS & Mac",
+      useEmoji: false,
     },
     {
       href: "https://f-droid.org/packages/com.boldwallet",
       icon: "/fdroid.ico",
       label: "F-Droid",
+      useEmoji: false,
+    },
+    {
+      href: "https://zapstore.dev/apps/naddr1qvzqqqr7pvpzq7xwd748yfjrsu5yuerm56fcn9tntmyv04w95etn0e23xrczvvraqq8xxmmd9e3x7mrywaskcmr9ws90nrd9",
+      icon: "",
+      label: "Zapstore",
+      useEmoji: true,
+      emoji: "⚡",
     },
   ];
 
@@ -38,8 +48,7 @@ export default function Hero() {
           </h1>
           <p className="text-lg sm:text-xl text-white/90 mb-10 max-w-2xl mx-auto animate-slide-up" style={{ animationDelay: '0.2s' }}>
             No seeds, no hardware wallets, no dependencies. Pure and Resilient
-            Bitcoin Security, Powered by Superior Threshold Signatures
-            technology.
+            Bitcoin Security, powered by advanced multi-device technology that keeps your keys safe across 2-3 devices.
           </p>
 
           {/* CTA Buttons */}
@@ -52,14 +61,18 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="group flex items-center space-x-3 bg-white/10 backdrop-blur-md hover:bg-white/20 px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-white/20"
               >
-                <div className="relative w-6 h-6">
-                  <Image
-                    src={button.icon}
-                    alt={button.label}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
+                {button.useEmoji ? (
+                  <span className="text-xl">{button.emoji}</span>
+                ) : (
+                  <div className="relative w-6 h-6">
+                    <Image
+                      src={button.icon}
+                      alt={button.label}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                )}
                 <span className="font-medium">{button.label}</span>
               </a>
             ))}

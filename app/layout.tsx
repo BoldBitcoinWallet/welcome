@@ -13,16 +13,21 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "Bold Bitcoin Wallet - Seedless. Hardware-Free. Limitless.",
   description:
-    "No seeds, no hardware wallets, no dependencies. Pure and Resilient Bitcoin Security, Powered by Superior Threshold Signatures technology.",
+    "No seeds, no hardware wallets, no dependencies. Pure and Resilient Bitcoin Security, powered by advanced multi-device technology that keeps your keys safe across 2-3 devices.",
   keywords: [
     "bitcoin",
     "wallet",
     "cryptocurrency",
     "seedless",
     "threshold signatures",
+    "2/3 MPC TSS",
+    "MPC TSS",
     "self-custody",
   ],
   authors: [{ name: "Bold Bitcoin Wallet" }],
+  icons: {
+    icon: "/logo.png",
+  },
   openGraph: {
     title: "Bold Bitcoin Wallet",
     description: "Seedless. Hardware-Free. Limitless.",

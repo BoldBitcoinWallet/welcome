@@ -35,12 +35,13 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="relative w-16 h-16 transition-transform duration-300 group-hover:scale-110">
+            <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-110 bg-white rounded shadow-sm">
               <Image
-                src="/logo.png"
+                src="/ic_launcher.png"
                 alt="Bold Logo"
-                fill
-                className="object-contain"
+                width={32}
+                height={32}
+                style={{margin: 4}}
               />
             </div>
             <span className="text-xl font-bold text-gray-100 hidden sm:block">
@@ -68,7 +69,7 @@ export default function Header() {
                 rel="noopener noreferrer"
                 className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-700 transition-colors duration-300"
               >
-                <Image src="/docs.svg" alt="Docs" width={24} height={24} />
+                <Image src="/documentation.png" alt="Docs" width={24} height={24} />
               </a>
             </li>
           </ul>
@@ -132,7 +133,7 @@ export default function Header() {
                 className="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-accent rounded-lg transition-colors duration-300"
               >
                 <Image
-                  src="/docs.svg"
+                  src="/documentation.png"
                   alt="Docs"
                   width={24}
                   height={24}

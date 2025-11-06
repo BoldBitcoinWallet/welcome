@@ -2,17 +2,29 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ScreenshotGallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const totalImages = 11;
+  const totalImages = 13;
 
-  const images = Array.from(
-    { length: totalImages },
-    (_, i) => `/img${i + 1}.webp`
-  );
+  const images = [
+    "/1.lock-left.png",
+    "/2.landing-left.png",
+    "/3.setup-left.png",
+    "/4.pairing-left.png",
+    "/5.keygen-left.png",
+    "/6.home-left.png",
+    "/7.currencies-left.png",
+    "/8.receive-left.png",
+    "/9.send-left.png",
+    "/10.sending-left.png",
+    "/11.keysign-left.png",
+    "/12.txdetails-left.png",
+    "/13.settings-left.png",
+  ];
 
   // Intersection Observer for scroll animation
   useEffect(() => {
@@ -66,15 +78,26 @@ export default function ScreenshotGallery() {
                 />
               </div>
 
-              {/* Current Image */}
-              <div className="relative w-64 sm:w-80 md:w-96 h-[500px] md:h-[600px] mx-4 transition-all duration-500 animate-fade-in">
-                <Image
-                  src={images[currentIndex]}
-                  alt={`Screenshot ${currentIndex + 1}`}
-                  fill
-                  className="object-contain drop-shadow-2xl"
-                  priority
-                />
+              {/* Current Image with crossfade */}
+              <div className="relative w-64 sm:w-80 md:w-96 h-[500px] md:h-[600px] mx-4">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={currentIndex}
+                    className="absolute inset-0"
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1.01 }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
+                  >
+                    <Image
+                      src={images[currentIndex]}
+                      alt={`Screenshot ${currentIndex + 1}`}
+                      fill
+                      className="object-contain drop-shadow-2xl"
+                      priority
+                    />
+                  </motion.div>
+                </AnimatePresence>
               </div>
 
               {/* Next Images (blurred) */}

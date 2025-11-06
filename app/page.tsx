@@ -11,8 +11,8 @@ export default function Home() {
     <>
       <Hero />
       <ScreenshotGallery />
-      <HowItWorks />
       <Features />
+      <HowItWorks />
       <Community />
       <CTASection />
       <Terms />

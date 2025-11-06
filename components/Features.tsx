@@ -8,36 +8,37 @@ export default function Features() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const features = [
     {
-      icon: "🔑",
-      title: "Seedless Setup",
-      description:
-        "Manage backups via your clouds, emails, or messaging apps. No seed phrases.",
-      gradient: "from-accent/20 to-accent/5",
-      iconBg: "bg-accent/10",
-      accentColor: "group-hover:text-accent",
-    },
-    {
       icon: "📱",
-      title: "Two-Device Threshold Security",
+      title: "Multi-Device Security",
       description:
-        "Unmatched security with two devices using Threshold Sigs technology.",
+        "Use 2 or 3 devices to secure your wallet. Any 2 devices can authorize transactions—resilient even if one device is lost or offline, giving you flexible 2-of-3 protection.",
       gradient: "from-secondary/20 to-secondary/5",
       iconBg: "bg-secondary/10",
       accentColor: "group-hover:text-secondary",
     },
     {
       icon: "🔒",
-      title: "Self Custody Grade",
+      title: "No Single Point of Control",
       description:
-        "All wallet operations are performed directly between your devices, offline.",
+        "One device or backup share alone can’t move your funds. Any 2 of your devices must approve—so a stolen phone or leaked share is harmless.",
       gradient: "from-primary/20 to-primary/5",
       iconBg: "bg-primary/10",
       accentColor: "group-hover:text-primary",
     },
     {
+      icon: "🔑",
+      title: "Seedless Self‑Custody",
+      description:
+        "No paper seeds, no hardware wallets. Back up safely using your trusted apps and stay in full control of your Bitcoin—simple, private, and resilient.",
+      gradient: "from-accent/20 to-accent/5",
+      iconBg: "bg-accent/10",
+      accentColor: "group-hover:text-accent",
+    },
+    {
       icon: "🌐",
       title: "Open Source",
-      description: "Empowering the community with open, auditable code.",
+      description:
+        "Fully open source on GitHub—review the code, verify how it works, and contribute improvements. Transparency you can trust.",
       gradient: "from-accent/20 to-accent/5",
       iconBg: "bg-accent/10",
       accentColor: "group-hover:text-accent",
@@ -143,7 +144,7 @@ export default function Features() {
         >
           {[
             { value: "100%", label: "Self-Custody" },
-            { value: "2", label: "Devices Required" },
+            { value: "2-3", label: "Devices Supported" },
             { value: "0", label: "Seed Phrases" },
             { value: "∞", label: "Peace of Mind" },
           ].map((stat, index) => (

@@ -5,10 +5,10 @@ import { motion } from 'framer-motion';
 
 export default function HowItWorks() {
   const steps = [
-    { number: 1, text: "Install on Two Devices" },
-    { number: 2, text: "Setup or Restore Your Wallet" },
-    { number: 3, text: "Manage Your Bitcoins" },
-    { number: 4, text: "HODL with Peace of Mind" },
+    { number: 1, text: "Install on 2 or 3 devices" },
+    { number: 2, text: "Secure your backups on trusted channels" },
+    { number: 3, text: "Approve with any 2 devices (2/3)" },
+    { number: 4, text: "HODL with peace of mind" },
   ];
 
   // Generate stars on client side only to avoid hydration mismatch
@@ -77,6 +77,19 @@ export default function HowItWorks() {
         >
           How It Works
         </motion.h2>
+
+        {/* Short explanation for 2 or 3 devices flow */}
+        <motion.p
+          className="text-center text-gray-300 max-w-2xl mx-auto -mt-12 mb-12"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          Set up Bold on 2 or 3 devices. Any 2 of them can approve a
+          transaction, giving you flexibility and strong protection if one
+          device is lost or unavailable.
+        </motion.p>
 
         <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, index) => (

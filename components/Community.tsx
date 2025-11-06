@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
 import Image from "next/image";
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 export default function Community() {
   const sectionRef = useRef(null);
@@ -16,6 +16,7 @@ export default function Community() {
       color: "hover:bg-black",
       gradient: "from-gray-800/50 to-black/50",
       description: "Follow us for updates",
+      useEmoji: false,
     },
     {
       href: "https://discord.gg/p4ectmVtJ2",
@@ -24,6 +25,7 @@ export default function Community() {
       color: "hover:bg-[#5865F2]",
       gradient: "from-[#5865F2]/30 to-[#5865F2]/10",
       description: "Join the conversation",
+      useEmoji: false,
     },
     {
       href: "https://github.com/BoldBitcoinWallet/",
@@ -32,6 +34,7 @@ export default function Community() {
       color: "hover:bg-gray-800",
       gradient: "from-gray-700/50 to-gray-900/50",
       description: "Contribute to our code",
+      useEmoji: false,
     },
   ];
 
@@ -40,7 +43,7 @@ export default function Community() {
       ref={sectionRef}
       id="community"
       className="relative py-16 sm:py-24 bg-gray-900 overflow-hidden"
-      style={{ marginTop: '-1px' }}
+      style={{ marginTop: "-1px" }}
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -59,7 +62,8 @@ export default function Community() {
             Join Our <span className="text-accent">Community</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Connect, contribute, and stay updated with the Bold Bitcoin Wallet ecosystem
+            Connect, contribute, and stay updated with the Bold Bitcoin Wallet
+            ecosystem
           </p>
         </motion.div>
 
@@ -71,17 +75,23 @@ export default function Community() {
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 30, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.9 }}
-              transition={{ 
-                duration: 0.5, 
+              animate={
+                isInView
+                  ? { opacity: 1, y: 0, scale: 1 }
+                  : { opacity: 0, y: 30, scale: 0.9 }
+              }
+              transition={{
+                duration: 0.5,
                 delay: index * 0.15,
                 type: "spring",
-                stiffness: 200
+                stiffness: 200,
               }}
               className="group relative"
             >
               {/* Hover Glow Effect */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${link.gradient} rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${link.gradient} rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+              ></div>
 
               {/* Card */}
               <div className="relative bg-gray-800/50 backdrop-blur-sm border border-white/10 group-hover:border-white/30 rounded-2xl p-8 transition-all duration-500 hover:scale-105 hover:shadow-2xl overflow-hidden">
@@ -89,7 +99,11 @@ export default function Community() {
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
-                  className="relative w-20 h-20 mx-auto mb-6 bg-gray-700/50 rounded-xl flex items-center justify-center group-hover:bg-gray-600/50 transition-colors duration-300 z-10"
+                  className={`relative w-20 h-20 mx-auto mb-6 rounded-xl flex items-center justify-center transition-colors duration-300 z-10 ${
+                    link.label === "X (Twitter)" || link.label === "GitHub"
+                      ? "bg-gray-500/70 group-hover:bg-gray-400/70"
+                      : "bg-gray-700/50 group-hover:bg-gray-600/50"
+                  }`}
                 >
                   <div className="relative w-12 h-12">
                     <Image
@@ -155,7 +169,8 @@ export default function Community() {
           className="mt-12"
         >
           <p className="text-gray-400 text-sm">
-            Have questions? Join our Discord community for support and discussions
+            Have questions? Join our Discord community for support and
+            discussions
           </p>
         </motion.div>
       </div>
