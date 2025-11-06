@@ -43,7 +43,6 @@ export default function Community() {
       ref={sectionRef}
       id="community"
       className="relative py-16 sm:py-24 bg-gray-900 overflow-hidden"
-      style={{ marginTop: "-1px" }}
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

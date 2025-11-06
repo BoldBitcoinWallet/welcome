@@ -15,45 +15,176 @@ export default function CTASection() {
   ];
 
   return (
-    <section 
-      ref={sectionRef}
-      className="relative py-16 sm:py-24 bg-gray-900 text-white overflow-hidden"
-      style={{ marginTop: '-1px' }}
-    >
-      {/* Animated Cloud Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Clouds - Layer 1 (Back) - Very subtle */}
+    <>
+      {/* Cool Animated Separator */}
+      <div className="relative bg-gray-900 overflow-hidden" style={{ height: '2px', marginTop: '-1px' }}>
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/60 via-secondary/60 via-accent/60 to-transparent h-full"
+          animate={{
+            x: ['-100%', '100%']
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        ></motion.div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/40 to-transparent h-full blur-sm"></div>
+      </div>
+      
+      <section 
+        ref={sectionRef}
+        className="relative py-16 sm:py-24 bg-gray-900 text-white overflow-hidden"
+      >
+        {/* Animated Cloud Background */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 1 }}>
+        {/* Clouds - Layer 1 (Back) - Deep background - Centered */}
         <motion.div
-          className="absolute top-[10%] left-0 w-64 h-32 bg-white/4 rounded-full blur-2xl"
-          animate={{ x: [-100, typeof window !== 'undefined' ? window.innerWidth + 100 : 2000] }}
-          transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[30%] left-0 w-80 h-40 bg-white/18 rounded-full blur-3xl"
+          animate={{ 
+            x: [-100, typeof window !== 'undefined' ? window.innerWidth + 100 : 2000],
+            y: [0, -10, 0],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{ 
+            x: { duration: 40, repeat: Infinity, ease: "linear" },
+            y: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+            scale: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+          }}
         ></motion.div>
         <motion.div
-          className="absolute top-[25%] left-0 w-48 h-24 bg-white/4 rounded-full blur-2xl"
-          animate={{ x: [-100, typeof window !== 'undefined' ? window.innerWidth + 100 : 2000] }}
-          transition={{ duration: 50, repeat: Infinity, ease: "linear", delay: 5 }}
+          className="absolute top-[45%] left-0 w-64 h-32 bg-white/16 rounded-full blur-3xl"
+          animate={{ 
+            x: [-100, typeof window !== 'undefined' ? window.innerWidth + 100 : 2000],
+            y: [0, 8, 0],
+            scale: [1, 0.95, 1]
+          }}
+          transition={{ 
+            x: { duration: 50, repeat: Infinity, ease: "linear", delay: 5 },
+            y: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 5 },
+            scale: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 5 }
+          }}
         ></motion.div>
         <motion.div
-          className="absolute top-[60%] left-0 w-56 h-28 bg-white/4 rounded-full blur-2xl"
-          animate={{ x: [-100, typeof window !== 'undefined' ? window.innerWidth + 100 : 2000] }}
-          transition={{ duration: 45, repeat: Infinity, ease: "linear", delay: 10 }}
+          className="absolute top-[60%] left-0 w-72 h-36 bg-white/18 rounded-full blur-3xl"
+          animate={{ 
+            x: [-100, typeof window !== 'undefined' ? window.innerWidth + 100 : 2000],
+            y: [0, -8, 0],
+            scale: [1, 1.05, 1]
+          }}
+          transition={{ 
+            x: { duration: 45, repeat: Infinity, ease: "linear", delay: 10 },
+            y: { duration: 9, repeat: Infinity, ease: "easeInOut", delay: 10 },
+            scale: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 10 }
+          }}
+        ></motion.div>
+        <motion.div
+          className="absolute top-[52%] left-0 w-56 h-28 bg-white/15 rounded-full blur-3xl"
+          animate={{ 
+            x: [-100, typeof window !== 'undefined' ? window.innerWidth + 100 : 2000],
+            y: [0, 10, 0],
+            scale: [1, 1.08, 1]
+          }}
+          transition={{ 
+            x: { duration: 55, repeat: Infinity, ease: "linear", delay: 12 },
+            y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 12 },
+            scale: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 12 }
+          }}
         ></motion.div>
 
-        {/* Clouds - Layer 2 (Front) - Very subtle */}
+        {/* Clouds - Layer 2 (Mid) - Medium depth - Centered */}
         <motion.div
-          className="absolute top-[15%] left-0 w-72 h-36 bg-white/6 rounded-full blur-xl"
-          animate={{ x: [-150, typeof window !== 'undefined' ? window.innerWidth + 150 : 2000] }}
-          transition={{ duration: 35, repeat: Infinity, ease: "linear", delay: 2 }}
+          className="absolute top-[35%] left-0 w-96 h-48 bg-white/22 rounded-full blur-2xl"
+          animate={{ 
+            x: [-150, typeof window !== 'undefined' ? window.innerWidth + 150 : 2000],
+            y: [0, -12, 0],
+            scale: [1, 1.15, 1]
+          }}
+          transition={{ 
+            x: { duration: 35, repeat: Infinity, ease: "linear", delay: 2 },
+            y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 },
+            scale: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }
+          }}
         ></motion.div>
         <motion.div
-          className="absolute top-[45%] left-0 w-64 h-32 bg-white/6 rounded-full blur-xl"
-          animate={{ x: [-150, typeof window !== 'undefined' ? window.innerWidth + 150 : 2000] }}
-          transition={{ duration: 38, repeat: Infinity, ease: "linear", delay: 8 }}
+          className="absolute top-[50%] left-0 w-80 h-40 bg-white/20 rounded-full blur-2xl"
+          animate={{ 
+            x: [-150, typeof window !== 'undefined' ? window.innerWidth + 150 : 2000],
+            y: [0, 9, 0],
+            scale: [1, 0.92, 1]
+          }}
+          transition={{ 
+            x: { duration: 38, repeat: Infinity, ease: "linear", delay: 8 },
+            y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 8 },
+            scale: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 8 }
+          }}
         ></motion.div>
         <motion.div
-          className="absolute top-[70%] left-0 w-52 h-26 bg-white/6 rounded-full blur-xl"
-          animate={{ x: [-150, typeof window !== 'undefined' ? window.innerWidth + 150 : 2000] }}
-          transition={{ duration: 42, repeat: Infinity, ease: "linear", delay: 15 }}
+          className="absolute top-[65%] left-0 w-64 h-32 bg-white/22 rounded-full blur-2xl"
+          animate={{ 
+            x: [-150, typeof window !== 'undefined' ? window.innerWidth + 150 : 2000],
+            y: [0, -9, 0],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{ 
+            x: { duration: 42, repeat: Infinity, ease: "linear", delay: 15 },
+            y: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 15 },
+            scale: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 15 }
+          }}
+        ></motion.div>
+        <motion.div
+          className="absolute top-[58%] left-0 w-72 h-36 bg-white/19 rounded-full blur-2xl"
+          animate={{ 
+            x: [-150, typeof window !== 'undefined' ? window.innerWidth + 150 : 2000],
+            y: [0, 11, 0],
+            scale: [1, 1.06, 1]
+          }}
+          transition={{ 
+            x: { duration: 48, repeat: Infinity, ease: "linear", delay: 18 },
+            y: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 18 },
+            scale: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 18 }
+          }}
+        ></motion.div>
+
+        {/* Clouds - Layer 3 (Front) - Most visible - Centered */}
+        <motion.div
+          className="absolute top-[40%] left-0 w-96 h-44 bg-white/25 rounded-full blur-xl"
+          animate={{ 
+            x: [-200, typeof window !== 'undefined' ? window.innerWidth + 200 : 2000],
+            y: [0, -15, 0],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ 
+            x: { duration: 30, repeat: Infinity, ease: "linear", delay: 3 },
+            y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 3 },
+            scale: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 3 }
+          }}
+        ></motion.div>
+        <motion.div
+          className="absolute top-[55%] left-0 w-80 h-38 bg-white/23 rounded-full blur-xl"
+          animate={{ 
+            x: [-200, typeof window !== 'undefined' ? window.innerWidth + 200 : 2000],
+            y: [0, 12, 0],
+            scale: [1, 0.9, 1]
+          }}
+          transition={{ 
+            x: { duration: 32, repeat: Infinity, ease: "linear", delay: 10 },
+            y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 10 },
+            scale: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 10 }
+          }}
+        ></motion.div>
+        <motion.div
+          className="absolute top-[62%] left-0 w-60 h-30 bg-white/25 rounded-full blur-xl"
+          animate={{ 
+            x: [-200, typeof window !== 'undefined' ? window.innerWidth + 200 : 2000],
+            y: [0, -11, 0],
+            scale: [1, 1.12, 1]
+          }}
+          transition={{ 
+            x: { duration: 36, repeat: Infinity, ease: "linear", delay: 20 },
+            y: { duration: 6, repeat: Infinity, ease: "easeInOut", delay: 20 },
+            scale: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: 20 }
+          }}
         ></motion.div>
       </div>
 
@@ -165,6 +296,7 @@ export default function CTASection() {
           </motion.div>
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }
