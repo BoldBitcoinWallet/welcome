@@ -45,8 +45,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@BoldBitcoin",
-    creator: "@BoldBitcoin",
+    site: "@boldbtcwallet",
+    creator: "@boldbtcwallet",
     images: ["/social-card.png"],
   },
 };
