@@ -11,6 +11,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://boldbitcoinwallet.com"),
   title: "Bold Bitcoin Wallet - Seedless. Hardware-Free. Limitless.",
   description:
     "No seeds, no hardware wallets, no dependencies. Pure and Resilient Bitcoin Security, powered by advanced multi-device technology that keeps your keys safe across 2-3 devices.",
@@ -31,7 +32,22 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Bold Bitcoin Wallet",
     description: "Seedless. Hardware-Free. Limitless.",
+    url: "/",
     type: "website",
+    images: [
+      {
+        url: "/social-card.png",
+        width: 1200,
+        height: 630,
+        alt: "Bold Bitcoin Wallet preview",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@BoldBitcoin",
+    creator: "@BoldBitcoin",
+    images: ["/social-card.png"],
   },
 };
 
