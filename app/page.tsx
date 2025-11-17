@@ -1,5 +1,4 @@
 import Hero from "@/components/Hero";
-import ScreenshotGallery from "@/components/ScreenshotGallery";
 import HowItWorks from "@/components/HowItWorks";
 import Features from "@/components/Features";
 import Community from "@/components/Community";
@@ -10,7 +9,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <ScreenshotGallery />
       <Features />
       <HowItWorks />
       <Community />

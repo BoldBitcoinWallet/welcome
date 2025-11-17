@@ -67,9 +67,9 @@ export default function ScreenshotGallery() {
         <div className={`relative max-w-6xl mx-auto transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           {/* Carousel */}
           <div className="relative overflow-visible rounded-2xl">
-            <div className="flex items-center justify-center pt-4 pb-8">
-              {/* Previous Images (blurred) */}
-              <div className="hidden md:block relative w-48 h-96 opacity-40 blur-sm transition-all duration-500">
+            <div className="flex flex-col items-center justify-center gap-6 pt-4 pb-8 lg:flex-row lg:gap-8">
+              {/* Previous Image (blurred) */}
+              <div className="relative w-40 h-64 sm:w-48 sm:h-80 lg:h-96 opacity-40 blur-sm transition-all duration-500">
                 <Image
                   src={images[(currentIndex - 1 + totalImages) % totalImages]}
                   alt="Previous screenshot"
@@ -100,8 +100,8 @@ export default function ScreenshotGallery() {
                 </AnimatePresence>
               </div>
 
-              {/* Next Images (blurred) */}
-              <div className="hidden md:block relative w-48 h-96 opacity-40 blur-sm transition-all duration-500">
+              {/* Next Image (blurred) */}
+              <div className="relative w-40 h-64 sm:w-48 sm:h-80 lg:h-96 opacity-40 blur-sm transition-all duration-500">
                 <Image
                   src={images[(currentIndex + 1) % totalImages]}
                   alt="Next screenshot"
