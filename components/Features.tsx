@@ -17,6 +17,24 @@ export default function Features() {
       accentColor: "group-hover:text-secondary",
     },
     {
+      icon: "🌍",
+      title: "MPC Over Nostr Relays",
+      description:
+        "Coordinate MPC TSS key generation and signing over the internet via Nostr relays, so co-signers can be in different countries yet still create wallets and approve transactions together over a resilient, censorship-resistant transport.",
+      gradient: "from-primary/20 to-primary/5",
+      iconBg: "bg-primary/10",
+      accentColor: "group-hover:text-primary",
+    },
+    {
+      icon: "🏦",
+      title: "Multi-Address Output Descriptors",
+      description:
+        "Generate and share output descriptors for Legacy, SegWit Native, and SegWit Compatible addresses, with clear copy/share/QR options so other wallets and services can integrate cleanly with your Bold wallet.",
+      gradient: "from-secondary/20 to-secondary/5",
+      iconBg: "bg-secondary/10",
+      accentColor: "group-hover:text-secondary",
+    },
+    {
       icon: "🔒",
       title: "No Single Point of Control",
       description:
@@ -24,6 +42,15 @@ export default function Features() {
       gradient: "from-primary/20 to-primary/5",
       iconBg: "bg-primary/10",
       accentColor: "group-hover:text-primary",
+    },
+    {
+      icon: "🔁",
+      title: "PSBT Interoperability",
+      description:
+        "Import and sign PSBTs from wallets like Sparrow or Electrum, with a dedicated PSBT screen and transport mode selector. Bold acts as a secure MPC-backed signer over local Wi‑Fi, hotspot, or resilient Nostr relays for flexible multisig workflows.",
+      gradient: "from-accent/20 to-accent/5",
+      iconBg: "bg-accent/10",
+      accentColor: "group-hover:text-accent",
     },
     {
       icon: "🔑",
@@ -35,10 +62,19 @@ export default function Features() {
       accentColor: "group-hover:text-accent",
     },
     {
+      icon: "🛰️",
+      title: "Privacy & Camouflage",
+      description:
+        "Connect to mempool.space or your own self-hosted mempool for private fee estimates and transaction tracking—and on Android, optionally camouflage the app icon so Bold blends into your home screen.",
+      gradient: "from-secondary/20 to-secondary/5",
+      iconBg: "bg-secondary/10",
+      accentColor: "group-hover:text-secondary",
+    },
+    {
       icon: "🌐",
       title: "Open Source",
       description:
-        "Fully open source on GitHub—review the code, verify how it works, and contribute improvements. Transparency you can trust.",
+        "Fully open source on GitHub, including a FOSS-friendly build that passes F-Droid requirements. Review the code, verify how it works, and contribute improvements—transparency you can trust.",
       gradient: "from-accent/20 to-accent/5",
       iconBg: "bg-accent/10",
       accentColor: "group-hover:text-accent",

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const totalImages = 13;
+  const totalImages = 17;
 
   const images = [
     "/1.lock-left.png",
@@ -21,7 +21,11 @@ export default function Hero() {
     "/10.sending-left.png",
     "/11.keysign-left.png",
     "/12.txdetails-left.png",
-    "/13.settings-left.png",
+    "/13.psbt-import.png",
+    "/14.psbt-modal-left.png",
+    "/15.psbt-view-left.png",
+    "/16.psbt-signed-left.png",
+    "/17.settings-left.png",
   ];
 
   const storeButtons = [
@@ -82,8 +86,8 @@ export default function Hero() {
                 <span className="text-accent">Limitless</span>
               </h1>
               <p className="text-lg sm:text-xl text-white/90 mb-10 max-w-2xl mx-auto lg:mx-0 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-                No seeds, no hardware wallets, no dependencies. Pure and Resilient
-                Bitcoin Security, powered by advanced multi-device technology that keeps your keys safe across 2-3 devices.
+                No seeds, no hardware wallets, no dependencies. Pure, resilient
+                Bitcoin security, powered by advanced multi-device MPC and Nostr-backed connectivity that keeps your keys safe and co-signers coordinated across 2–3 devices, even across borders.
               </p>
 
               {/* CTA Buttons */}

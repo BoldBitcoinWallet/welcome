@@ -86,9 +86,9 @@ export default function HowItWorks() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Set up Bold on 2 or 3 devices. Any 2 of them can approve a
-          transaction, giving you flexibility and strong protection if one
-          device is lost or unavailable.
+          Set up Bold on 2 or 3 devices. Any 2 of them can approve a transaction,
+          giving you flexibility, strong protection if one device is lost or offline,
+          and resilient coordination over local networks or Nostr relays.
         </motion.p>
 
         <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

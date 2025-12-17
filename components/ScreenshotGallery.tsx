@@ -8,7 +8,7 @@ export default function ScreenshotGallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const totalImages = 13;
+  const totalImages = 17;
 
   const images = [
     "/1.lock-left.png",
@@ -23,7 +23,11 @@ export default function ScreenshotGallery() {
     "/10.sending-left.png",
     "/11.keysign-left.png",
     "/12.txdetails-left.png",
-    "/13.settings-left.png",
+    "/13.psbt-import.png",
+    "/14.psbt-modal-left.png",
+    "/15.psbt-view-left.png",
+    "/16.psbt-signed-left.png",
+    "/17.settings-left.png",
   ];
 
   // Intersection Observer for scroll animation
