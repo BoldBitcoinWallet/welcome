@@ -1,6 +1,8 @@
 import Hero from "@/components/Hero";
 import HowItWorks from "@/components/HowItWorks";
 import Features from "@/components/Features";
+import Advocates from "@/components/Advocates";
+import SelfCustodyWallets from "@/components/SelfCustodyWallets";
 import Community from "@/components/Community";
 import CTASection from "@/components/CTASection";
 import Terms from "@/components/Terms";
@@ -13,6 +15,8 @@ export default function Home() {
       <HowItWorks />
       <Community />
       <CTASection />
+      <Advocates />
+      <SelfCustodyWallets />
       <Terms />
     </>
   );
