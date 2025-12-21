@@ -83,13 +83,13 @@ export default function Advocates() {
           className="text-center mb-8"
         >
           <p className="text-gray-400 text-sm uppercase tracking-wider mb-4">
-            Shared Values
+            Bitcoin Ecosystem
           </p>
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
             Self-Custody <span className="text-accent">Advocates</span>
           </h2>
           <p className="text-gray-400 text-sm max-w-xl mx-auto">
-            Organizations that share our commitment to Bitcoin self-custody and
+            Organizations in the Bitcoin ecosystem that share our commitment to self-custody and
             financial sovereignty
           </p>
         </motion.div>
