@@ -54,6 +54,12 @@ export default function Hero() {
       useEmoji: true,
       emoji: "⚡",
     },
+    {
+      href: "https://chromewebstore.google.com/detail/bold-wallet/dpgigdojkmhknnoedgbkfdeilmlbdecf",
+      icon: "/chrome-web-store.svg",
+      label: "Chrome",
+      useEmoji: false,
+    },
   ];
 
   const nextSlide = () => {
