@@ -19,6 +19,7 @@ export default function Header() {
   const navItems = [
     { href: "#features", label: "Features" },
     { href: "#how-it-works", label: "How It Works" },
+    { href: "#chrome-extension", label: "Extension" },
     { href: "#community", label: "Community" },
     { href: "#terms", label: "Terms" },
   ];
