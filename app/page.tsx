@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import EventManchette from "@/components/EventManchette";
 import HowItWorks from "@/components/HowItWorks";
 import Features from "@/components/Features";
 import ChromeExtension from "@/components/ChromeExtension";
@@ -11,6 +12,7 @@ import Terms from "@/components/Terms";
 export default function Home() {
   return (
     <>
+      <EventManchette />
       <Hero />
       <Features />
       <HowItWorks />
