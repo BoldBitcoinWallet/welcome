@@ -32,19 +32,20 @@ export default function EventManchette() {
               sizes="56px"
             />
           </div>
-
-          <span className="inline-flex items-center gap-1 font-semibold text-accent">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-            LIVE
+          <span className="min-w-0 flex flex-col">
+            <span className="truncate text-white/95">
+              <span className="font-semibold text-accent">
+                Bitcoin Ireland 2026
+              </span>{" "}
+              • May 22-25 • Dublin
+            </span>
+            <span className="text-[10px] sm:text-xs text-accent/95 font-medium mt-1">
+              Join us, get 10% off with code{" "}
+              <span className="inline-flex items-center rounded-sm border border-accent/60 bg-accent/20 px-1.5 py-0.5 text-[10px] sm:text-[11px] font-bold text-accent">
+                BOLDBTC
+              </span>
+            </span>
           </span>
-          <span className="truncate text-white/95">
-            <span className="font-semibold text-accent">Bitcoin Ireland 2026</span>{" "}
-            • May 22-25 • Dublin
-          </span>
-          <span className="hidden font-semibold text-accent sm:inline">
-            -10% BOLDBTC
-          </span>
-          <span className="hidden text-white/70 sm:inline">Tap to open</span>
         </motion.a>
       </div>
     </section>
