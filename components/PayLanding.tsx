@@ -56,6 +56,9 @@ function PayLandingContent() {
     return query ? `bitcoin:${address}?${query}` : `bitcoin:${address}`;
   }, [address, amount, label]);
 
+  // One-shot mobile handoff. Never set window.location to payUrl — same URL reloads forever.
+  // 1) Synthetic tap on HTTPS link (App / Universal Links, user-gesture-like on some OSes).
+  // 2) After delay, fall back to bitcoin: if the page is still visible.
   useEffect(() => {
     if (!address || typeof window === 'undefined') {
       return;
@@ -64,8 +67,30 @@ function PayLandingContent() {
     if (!isMobile) {
       return;
     }
-    window.location.href = payUrl;
-  }, [address, payUrl]);
+    const attemptKey = `boldwallet_pay_auto:${payUrl}`;
+    if (sessionStorage.getItem(attemptKey)) {
+      return;
+    }
+    sessionStorage.setItem(attemptKey, '1');
+
+    const link = document.createElement('a');
+    link.href = payUrl;
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    if (!bitcoinUri) {
+      return;
+    }
+    const fallbackMs = 1200;
+    const timer = window.setTimeout(() => {
+      if (document.visibilityState === 'visible') {
+        window.location.href = bitcoinUri;
+      }
+    }, fallbackMs);
+    return () => window.clearTimeout(timer);
+  }, [address, payUrl, bitcoinUri]);
 
   return (
     <section className="relative min-h-[70vh] bg-gray-900 text-white overflow-hidden">
@@ -83,7 +108,7 @@ function PayLandingContent() {
         </h1>
         <p className="mb-8 text-gray-300 leading-relaxed">
           {address
-            ? 'This link sends a payment request to Bold Wallet. On mobile, the app should open automatically if installed.'
+            ? 'If Bold Wallet is installed, tapping the original https://boldbitcoinwallet.com/pay link (e.g. in Messages) should open the app directly. If you see this page instead, we try once to hand off to the app, then you can use the buttons below.'
             : 'Share a payment link with an address (and optional amount) to open Bold Wallet.'}
         </p>
 
@@ -130,7 +155,7 @@ function PayLandingContent() {
               href={payUrl}
               className="inline-flex items-center justify-center rounded-lg bg-accent px-6 py-3 font-semibold text-gray-900 transition hover:opacity-90"
             >
-              Open Bold Wallet
+              Open Bold Wallet (app link)
             </a>
           ) : null}
           {bitcoinUri ? (
