@@ -3,6 +3,7 @@
 import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { buildBoldwalletPayUri } from '@/lib/boldwalletPayUri';
 import {
   fetchBtcUsdRate,
   formatUsd,
@@ -43,6 +44,13 @@ function PayLandingContent() {
     return query
       ? `https://boldbitcoinwallet.com/pay?${query}`
       : 'https://boldbitcoinwallet.com/pay';
+  }, [address, amount, label]);
+
+  const boldwalletPayUri = useMemo(() => {
+    if (!address) {
+      return '';
+    }
+    return buildBoldwalletPayUri(address, amount, label);
   }, [address, amount, label]);
 
   const bitcoinUri = useMemo(() => {
@@ -100,22 +108,31 @@ function PayLandingContent() {
     };
   }, [btcAmount]);
 
-  // One-shot mobile handoff via bitcoin: only (HTTPS payUrl reloads when already on /pay).
+  // One-shot mobile handoff: boldwallet://pay opens the app from an in-browser /pay page.
   useEffect(() => {
-    if (!bitcoinUri || typeof window === 'undefined') {
+    if (!boldwalletPayUri || typeof window === 'undefined') {
       return;
     }
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     if (!isMobile) {
       return;
     }
-    const attemptKey = `boldwallet_pay_auto:${bitcoinUri}`;
+    const attemptKey = `boldwallet_pay_auto:${boldwalletPayUri}`;
     if (sessionStorage.getItem(attemptKey)) {
       return;
     }
     sessionStorage.setItem(attemptKey, '1');
-    window.location.href = bitcoinUri;
-  }, [bitcoinUri]);
+    window.location.href = boldwalletPayUri;
+    if (!bitcoinUri) {
+      return;
+    }
+    const timer = window.setTimeout(() => {
+      if (document.visibilityState === 'visible') {
+        window.location.href = bitcoinUri;
+      }
+    }, 1500);
+    return () => window.clearTimeout(timer);
+  }, [boldwalletPayUri, bitcoinUri]);
 
   return (
     <section className="relative min-h-[70vh] bg-gray-900 text-white overflow-hidden">
@@ -133,7 +150,7 @@ function PayLandingContent() {
         </h1>
         <p className="mb-8 text-gray-300 leading-relaxed">
           {address
-            ? 'Tap the button below to open this payment in Bold Wallet. Share the https link from Messages or email for automatic app open when Bold Wallet is installed.'
+            ? 'Tap Open in Bold Wallet to launch the app from this page (boldwallet:// link). Share the https link from Messages or email for automatic open without visiting this page first.'
             : 'Share a payment link with an address (and optional amount) to open Bold Wallet.'}
         </p>
 
@@ -184,9 +201,9 @@ function PayLandingContent() {
         )}
 
         <div className="flex flex-col gap-3">
-          {address && bitcoinUri ? (
+          {address && boldwalletPayUri ? (
             <a
-              href={bitcoinUri}
+              href={boldwalletPayUri}
               className="pay-landing-cta flex w-full items-center justify-center gap-3 rounded-xl bg-secondary px-6 py-4 text-base font-semibold text-white shadow-lg ring-1 ring-white/10 transition hover:opacity-95 active:scale-[0.99]"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
