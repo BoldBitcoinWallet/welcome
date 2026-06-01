@@ -1,7 +1,6 @@
 'use client';
 
-import { Suspense, useEffect, useMemo, useState } from 'react';
-import Image from 'next/image';
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import {
@@ -25,6 +24,7 @@ function PayLandingContent() {
 
   const [usdRate, setUsdRate] = useState<number | null>(null);
   const [usdRateFailed, setUsdRateFailed] = useState(false);
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
 
   const btcAmount = useMemo(() => parseBtcAmount(amount), [amount]);
 
@@ -67,6 +67,17 @@ function PayLandingContent() {
     return btcAmount * usdRate;
   }, [btcAmount, usdRate]);
 
+  const copyPayLink = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(payUrl);
+      setCopyState('copied');
+      window.setTimeout(() => setCopyState('idle'), 2000);
+    } catch {
+      setCopyState('failed');
+      window.setTimeout(() => setCopyState('idle'), 2000);
+    }
+  }, [payUrl]);
+
   useEffect(() => {
     if (btcAmount == null) {
       return;
@@ -89,39 +100,22 @@ function PayLandingContent() {
     };
   }, [btcAmount]);
 
-  // One-shot mobile handoff. Never set window.location to payUrl — same URL reloads forever.
+  // One-shot mobile handoff via bitcoin: only (HTTPS payUrl reloads when already on /pay).
   useEffect(() => {
-    if (!address || typeof window === 'undefined') {
+    if (!bitcoinUri || typeof window === 'undefined') {
       return;
     }
     const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     if (!isMobile) {
       return;
     }
-    const attemptKey = `boldwallet_pay_auto:${payUrl}`;
+    const attemptKey = `boldwallet_pay_auto:${bitcoinUri}`;
     if (sessionStorage.getItem(attemptKey)) {
       return;
     }
     sessionStorage.setItem(attemptKey, '1');
-
-    const link = document.createElement('a');
-    link.href = payUrl;
-    link.rel = 'noopener noreferrer';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    if (!bitcoinUri) {
-      return;
-    }
-    const fallbackMs = 1200;
-    const timer = window.setTimeout(() => {
-      if (document.visibilityState === 'visible') {
-        window.location.href = bitcoinUri;
-      }
-    }, fallbackMs);
-    return () => window.clearTimeout(timer);
-  }, [address, payUrl, bitcoinUri]);
+    window.location.href = bitcoinUri;
+  }, [bitcoinUri]);
 
   return (
     <section className="relative min-h-[70vh] bg-gray-900 text-white overflow-hidden">
@@ -139,7 +133,7 @@ function PayLandingContent() {
         </h1>
         <p className="mb-8 text-gray-300 leading-relaxed">
           {address
-            ? 'If Bold Wallet is installed, the original pay link should open the app from Messages or email. If you see this page, use the button below or the bitcoin: link for other wallets.'
+            ? 'Tap the button below to open this payment in Bold Wallet. Share the https link from Messages or email for automatic app open when Bold Wallet is installed.'
             : 'Share a payment link with an address (and optional amount) to open Bold Wallet.'}
         </p>
 
@@ -189,27 +183,40 @@ function PayLandingContent() {
           </div>
         )}
 
-        <div className="flex flex-col gap-4">
-          {address ? (
+        <div className="flex flex-col gap-3">
+          {address && bitcoinUri ? (
             <a
-              href={payUrl}
-              className="inline-flex items-center justify-center gap-3 rounded-lg bg-accent px-6 py-3.5 font-semibold text-gray-900 transition hover:opacity-90"
+              href={bitcoinUri}
+              className="pay-landing-cta flex w-full items-center justify-center gap-3 rounded-xl bg-secondary px-6 py-4 text-base font-semibold text-white shadow-lg ring-1 ring-white/10 transition hover:opacity-95 active:scale-[0.99]"
             >
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/logo.png"
                 alt=""
-                width={32}
-                height={32}
-                className="rounded-lg shrink-0"
-                aria-hidden
+                width={36}
+                height={36}
+                className="h-9 w-9 shrink-0 rounded-lg bg-white/90 p-0.5"
               />
               <span>Open in Bold Wallet</span>
             </a>
           ) : null}
+          {address ? (
+            <button
+              type="button"
+              onClick={() => void copyPayLink()}
+              className="w-full rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-sm font-medium text-gray-200 transition hover:bg-white/10"
+            >
+              {copyState === 'copied'
+                ? 'Payment link copied'
+                : copyState === 'failed'
+                  ? 'Could not copy — long-press to copy'
+                  : 'Copy https payment link to share'}
+            </button>
+          ) : null}
           {bitcoinUri ? (
             <a
               href={bitcoinUri}
-              className="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/5 px-6 py-3 text-sm font-medium text-gray-200 transition hover:bg-white/10 hover:text-white"
+              className="w-full rounded-xl border border-white/15 bg-white/5 px-6 py-3 text-center text-sm font-medium text-gray-200 transition hover:bg-white/10 hover:text-white"
             >
               Open with another Bitcoin wallet
               <span className="ml-1 font-mono text-xs text-gray-400">(bitcoin:)</span>
@@ -217,7 +224,7 @@ function PayLandingContent() {
           ) : null}
           <Link
             href="/"
-            className="inline-flex items-center justify-center rounded-lg border border-white/10 px-6 py-3 font-medium text-gray-300 transition hover:text-white"
+            className="inline-flex w-full items-center justify-center rounded-xl border border-white/10 px-6 py-3 font-medium text-gray-300 transition hover:text-white"
           >
             Back to home
           </Link>
