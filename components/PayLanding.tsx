@@ -1,20 +1,19 @@
 'use client';
 
-import { Suspense, useEffect, useMemo } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import {
+  fetchBtcUsdRate,
+  formatUsd,
+  parseBtcAmount,
+} from '@/lib/btcUsdPrice';
 
 const PLAY_STORE_URL =
   'https://play.google.com/store/apps/details?id=com.boldwallet';
 const APP_STORE_URL =
   'https://apps.apple.com/us/app/bold-bitcoin-wallet/id6748949478';
-
-function truncateMiddle(value: string, head = 12, tail = 8): string {
-  if (value.length <= head + tail + 3) {
-    return value;
-  }
-  return `${value.slice(0, head)}…${value.slice(-tail)}`;
-}
 
 function PayLandingContent() {
   const searchParams = useSearchParams();
@@ -23,6 +22,11 @@ function PayLandingContent() {
     .trim();
   const amount = searchParams.get('amount')?.trim() || '';
   const label = searchParams.get('label')?.trim() || '';
+
+  const [usdRate, setUsdRate] = useState<number | null>(null);
+  const [usdRateFailed, setUsdRateFailed] = useState(false);
+
+  const btcAmount = useMemo(() => parseBtcAmount(amount), [amount]);
 
   const payUrl = useMemo(() => {
     const params = new URLSearchParams();
@@ -56,9 +60,36 @@ function PayLandingContent() {
     return query ? `bitcoin:${address}?${query}` : `bitcoin:${address}`;
   }, [address, amount, label]);
 
+  const usdEquivalent = useMemo(() => {
+    if (btcAmount == null || usdRate == null) {
+      return null;
+    }
+    return btcAmount * usdRate;
+  }, [btcAmount, usdRate]);
+
+  useEffect(() => {
+    if (btcAmount == null) {
+      return;
+    }
+    let cancelled = false;
+    setUsdRateFailed(false);
+    fetchBtcUsdRate().then(rate => {
+      if (cancelled) {
+        return;
+      }
+      if (rate == null) {
+        setUsdRateFailed(true);
+        setUsdRate(null);
+      } else {
+        setUsdRate(rate);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [btcAmount]);
+
   // One-shot mobile handoff. Never set window.location to payUrl — same URL reloads forever.
-  // 1) Synthetic tap on HTTPS link (App / Universal Links, user-gesture-like on some OSes).
-  // 2) After delay, fall back to bitcoin: if the page is still visible.
   useEffect(() => {
     if (!address || typeof window === 'undefined') {
       return;
@@ -108,26 +139,35 @@ function PayLandingContent() {
         </h1>
         <p className="mb-8 text-gray-300 leading-relaxed">
           {address
-            ? 'If Bold Wallet is installed, tapping the original https://boldbitcoinwallet.com/pay link (e.g. in Messages) should open the app directly. If you see this page instead, we try once to hand off to the app, then you can use the buttons below.'
+            ? 'If Bold Wallet is installed, the original pay link should open the app from Messages or email. If you see this page, use the button below or the bitcoin: link for other wallets.'
             : 'Share a payment link with an address (and optional amount) to open Bold Wallet.'}
         </p>
 
         {address ? (
-          <div className="mb-8 rounded-xl border border-white/10 bg-white/5 p-5 space-y-3">
+          <div className="mb-8 rounded-xl border border-white/10 bg-white/5 p-5 space-y-4">
             <div>
               <p className="text-xs uppercase tracking-wide text-gray-400">
                 Address
               </p>
-              <p className="mt-1 break-all font-mono text-sm text-gray-100">
-                {truncateMiddle(address, 16, 16)}
+              <p className="mt-1 break-all font-mono text-sm leading-relaxed text-gray-100 select-all">
+                {address}
               </p>
             </div>
             {amount ? (
               <div>
                 <p className="text-xs uppercase tracking-wide text-gray-400">
-                  Amount (BTC)
+                  Amount
                 </p>
-                <p className="mt-1 text-lg font-semibold text-white">{amount}</p>
+                <p className="mt-1 text-lg font-semibold text-white">
+                  {amount} BTC
+                </p>
+                {btcAmount != null && usdEquivalent != null ? (
+                  <p className="mt-1 text-sm text-gray-300">
+                    ≈ {formatUsd(usdEquivalent)} USD
+                  </p>
+                ) : btcAmount != null && !usdRateFailed ? (
+                  <p className="mt-1 text-sm text-gray-500">Loading USD rate…</p>
+                ) : null}
               </div>
             ) : null}
             {label ? (
@@ -149,21 +189,30 @@ function PayLandingContent() {
           </div>
         )}
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <div className="flex flex-col gap-4">
           {address ? (
             <a
               href={payUrl}
-              className="inline-flex items-center justify-center rounded-lg bg-accent px-6 py-3 font-semibold text-gray-900 transition hover:opacity-90"
+              className="inline-flex items-center justify-center gap-3 rounded-lg bg-accent px-6 py-3.5 font-semibold text-gray-900 transition hover:opacity-90"
             >
-              Open Bold Wallet (app link)
+              <Image
+                src="/logo.png"
+                alt=""
+                width={32}
+                height={32}
+                className="rounded-lg shrink-0"
+                aria-hidden
+              />
+              <span>Open in Bold Wallet</span>
             </a>
           ) : null}
           {bitcoinUri ? (
             <a
               href={bitcoinUri}
-              className="inline-flex items-center justify-center rounded-lg border border-white/20 bg-white/5 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
+              className="inline-flex items-center justify-center rounded-lg border border-white/15 bg-white/5 px-6 py-3 text-sm font-medium text-gray-200 transition hover:bg-white/10 hover:text-white"
             >
-              Open via bitcoin: URI
+              Open with another Bitcoin wallet
+              <span className="ml-1 font-mono text-xs text-gray-400">(bitcoin:)</span>
             </a>
           ) : null}
           <Link
