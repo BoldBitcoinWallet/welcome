@@ -3,6 +3,7 @@ import EventManchette from "@/components/EventManchette";
 import HowItWorks from "@/components/HowItWorks";
 import Features from "@/components/Features";
 import ChromeExtension from "@/components/ChromeExtension";
+import VerifiedPayments from "@/components/VerifiedPayments";
 import Advocates from "@/components/Advocates";
 import SelfCustodyWallets from "@/components/SelfCustodyWallets";
 import Community from "@/components/Community";
@@ -17,6 +18,7 @@ export default function Home() {
       <Features />
       <HowItWorks />
       <ChromeExtension />
+      <VerifiedPayments />
       <Community />
       <CTASection />
       <Advocates />

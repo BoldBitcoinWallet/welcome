@@ -20,6 +20,7 @@ export default function Header() {
     { href: "#features", label: "Features" },
     { href: "#how-it-works", label: "How It Works" },
     { href: "#chrome-extension", label: "Extension" },
+    { href: "#verified-payments", label: "Verified Payments" },
     { href: "#community", label: "Community" },
     { href: "#terms", label: "Terms" },
   ];
